@@ -721,6 +721,26 @@ main {
   line-height: 1.6;
 }
 
+/* Video modal overrides: center and remove extra space */
+[data-video-modal-container] .testimonials-modal {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  max-width: 92vw;
+}
+
+[data-video-modal-container] .modal-content {
+  padding: 0;
+}
+
+[data-video-modal-container] .modal-close-btn {
+  top: -12px;
+  right: -12px;
+}
+
 
 /**
  * #clients 
@@ -1882,4 +1902,104 @@ textarea.form-input::-webkit-resizer { display: none; }
 }
 .project-item {
   display: block;
+}
+
+/* ============================
+   Force video modal compact layout
+   ============================ */
+[data-video-modal-container] .testimonials-modal {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  display: block !important;
+  width: fit-content !important;
+  max-width: 92vw !important;
+}
+
+[data-video-modal-container] .modal-content { padding: 0 !important; }
+
+[data-video-modal-container] .modal-container.active .testimonials-modal,
+[data-video-modal-container] .testimonials-modal { transform: none !important; opacity: 1 !important; }
+
+/* Explicit class override */
+.video-modal {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  width: fit-content !important;
+  max-width: 92vw !important;
+}
+
+.video-modal .modal-content { padding: 0 !important; }
+
+/* Dynamic video frame sizing */
+[data-video-wrapper] {
+  transition: aspect-ratio 0.3s ease, max-width 0.3s ease;
+  margin: 0 auto;
+  background: var(--eerie-black-1);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-video-element],
+[data-video-iframe] {
+  max-width: 100%;
+  max-height: 80vh;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ensure videos fit without compression */
+}
+
+[data-video-element] {
+  display: block;
+  margin: 0 auto;
+}
+
+/* ============================
+   Shorts & Reels (9:16 thumbnails)
+   ============================ */
+.shorts-reels .project-img {
+  height: auto !important;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--eerie-black-1);
+}
+
+.shorts-reels .project-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Changed from cover to contain - no compression/cropping */
+  object-position: center;
+}
+
+/* Make shorts smaller and center titles */
+.shorts-reels h3 { text-align: center; }
+
+.shorts-reels .project-list {
+  justify-items: center;
+  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.shorts-reels .project-item > a { width: auto; }
+.shorts-reels .project-img { width: 160px; }
+.shorts-reels .project-title { text-align: center; margin-top: 6px; }
+
+@media (min-width: 768px) {
+  .shorts-reels .project-img { width: 180px; }
+  .shorts-reels .project-list { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .shorts-reels .project-img { width: 200px; }
+  .shorts-reels .project-list { grid-template-columns: repeat(4, 1fr); }
 }
